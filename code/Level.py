@@ -5,7 +5,7 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, WIN_WIDTH
+from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, WIN_WIDTH, EVENT_OBSTACLES
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 
@@ -16,15 +16,22 @@ class Level:
         self.window = window
         self.name = name
         self.game_mode = game_mode
+        self.timeout = 20000 #
+
+        # Create Entities list
         self.bg_entity_list: list[Entity] = []
         self.md_entity_list: list[Entity] = []
-        self.timeout = 20000 # 20 segundos
-        # Create Entities
+        self.foreground_list: list[Entity] = [] # for obstacles and effects (future implementation)
+        # Background
         self.bg_entity_list.extend(EntityFactory.get_entity('Starfield')) # Background
         pygame.time.set_timer(EVENT_PLANETS, 4000) # Background planets
+        #Players
         self.md_entity_list.append(EntityFactory.get_entity('Player1'))
-        # if game_mode == '2P':
-        #     self.entity_list.append(EntityFactory.get_entity('Player2'))
+        if game_mode == '2P':
+            self.md_entity_list.append(EntityFactory.get_entity('Player2'))
+        #Obstacles
+        pygame.time.set_timer(EVENT_OBSTACLES, 2000) # Background planets
+
 
 
     def run(self):
@@ -43,6 +50,10 @@ class Level:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move(self.game_mode == '2P')
 
+            for ent in self.foreground_list:
+                self.window.blit(source=ent.surf, dest=ent.rect)
+                ent.move(self.game_mode == '2P')
+
 
             for event in pygame.event.get():
                 # Close window
@@ -51,7 +62,10 @@ class Level:
                     sys.exit()  # End pygame
 
                 if event.type == EVENT_PLANETS:
-                    self.bg_entity_list.append(EntityFactory.get_entity('Planet', (WIN_WIDTH, random.randint(-15, WIN_HEIGHT + 10))))
+                    self.bg_entity_list.append(EntityFactory.get_entity('Planet'))
+
+                if event.type == EVENT_OBSTACLES:
+                    self.foreground_list.append(EntityFactory.get_entity('Obstacle'))
 
             # print text
             self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', COLOR_TEXT_WHITE, (10, 5))

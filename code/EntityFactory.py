@@ -2,7 +2,7 @@ import random
 
 from code.Background import Background
 from code.Const import WIN_WIDTH, ENTITY_SPEED, WIN_HEIGHT
-from code.Enemy import Enemy
+from code.Obstacle import Obstacle
 from code.Planet import Planet
 from code.Player import Player
 
@@ -10,7 +10,7 @@ from code.Player import Player
 class EntityFactory:
 
     @staticmethod
-    def get_entity(entity_name: str, position=(0,0)):
+    def get_entity(entity_name: str):
         match entity_name:
             case 'Starfield':
                 list_bg = [Background('Starfield.jpg', (0, 0), ENTITY_SPEED['Starfield']),
@@ -22,7 +22,16 @@ class EntityFactory:
                 return Player('Player1.png', (10, WIN_HEIGHT / 2), 1)
             case 'Player2':
                 return Player('Player2', (10, WIN_HEIGHT * 0.75), 1, keyboard=2)
-            case 'Enemy1':
-                return Enemy('Enemy1', (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT - 30)))
-            case 'Enemy2':
-                return Enemy('Enemy2', (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT - 30)))
+            case 'Obstacle':
+                obstacle = EntityFactory.define_obstacle()
+                name = f'{obstacle["type"]}{random.randint(obstacle['range'][0], obstacle['range'][1])}.png'
+                return Obstacle(name, (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT - 30)))
+
+    @staticmethod
+    def define_obstacle():
+        possibilities = [
+            {'type':'asteroids/lg_asteroid', 'range': (1, 112)},
+            {'type':'asteroids/md_asteroid', 'range': (1, 160)},
+            {'type':'asteroids/sm_asteroid', 'range': (1, 96)},
+        ]
+        return random.choices(possibilities, [25, 35, 40], k=1)[0] # choice random with weights
