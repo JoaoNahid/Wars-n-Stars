@@ -32,7 +32,7 @@ class Level:
         while True:
             clock.tick(60)
 
-            # Render
+            # Render Entities
             # 1st Background entities
             for ent in self.bg_entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
@@ -55,8 +55,7 @@ class Level:
 
             # print text
             self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', COLOR_TEXT_WHITE, (10, 5))
-            self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 35))
-            self.level_text(14, f'Entities: {len(self.md_entity_list)}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 20))
+            self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 25))
             pygame.display.flip()
 
             # Degree timeout
