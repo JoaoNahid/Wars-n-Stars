@@ -5,7 +5,7 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_ENEMY
+from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, WIN_WIDTH
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 
@@ -19,12 +19,12 @@ class Level:
         self.entity_list: list[Entity] = []
         self.timeout = 20000 # 20 segundos
         # Create Entities
-        self.entity_list.extend(EntityFactory.get_entity('Level1Bg'))
+        self.entity_list.extend(EntityFactory.get_entity('Starfield')) # Background
+        pygame.time.set_timer(EVENT_PLANETS, 1000) # Background planets
         # self.entity_list.append(EntityFactory.get_entity('Player1'))
         # if game_mode == '2P':
         #     self.entity_list.append(EntityFactory.get_entity('Player2'))
 
-        # pygame.time.set_timer(EVENT_ENEMY, 2000)
 
     def run(self):
         clock = pygame.time.Clock()
@@ -40,8 +40,8 @@ class Level:
                     pygame.quit()  # Close window
                     sys.exit()  # End pygame
 
-                if event.type == EVENT_ENEMY:
-                    self.entity_list.append(EntityFactory.get_entity(f'Enemy{random.randint(1,2)}'))
+                if event.type == EVENT_PLANETS:
+                    self.entity_list.append(EntityFactory.get_entity('Planet', (WIN_WIDTH, random.randint(-15, WIN_HEIGHT + 10))))
 
             # print text
             self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', COLOR_TEXT_WHITE, (10, 5))

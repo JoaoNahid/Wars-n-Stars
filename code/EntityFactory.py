@@ -3,6 +3,7 @@ import random
 from code.Background import Background
 from code.Const import WIN_WIDTH, ENTITY_SPEED, WIN_HEIGHT
 from code.Enemy import Enemy
+from code.Planet import Planet
 from code.Player import Player
 
 
@@ -11,12 +12,12 @@ class EntityFactory:
     @staticmethod
     def get_entity(entity_name: str, position=(0,0)):
         match entity_name:
-            case 'Level1Bg':
-                list_bg = []
-                list_bg.append(Background('Starfield.jpg', (0,0), 3))
-                list_bg.append(Background('Starfield.jpg', (WIN_WIDTH,0), 3))
-                # for i in range(7):
+            case 'Starfield':
+                list_bg = [Background('Starfield.jpg', (0, 0), ENTITY_SPEED['Starfield']),
+                           Background('Starfield.jpg', (WIN_WIDTH, 0), ENTITY_SPEED['Starfield'])]
                 return list_bg
+            case 'Planet':
+                return Planet(f'Planet{random.randint(1,12)}.png', (WIN_WIDTH + 10, random.randint(-5, WIN_HEIGHT + 5)), 1, random.randint(1,4) )
             case 'Player1':
                 return Player('Player1', (10, WIN_HEIGHT / 2), 1)
             case 'Player2':
