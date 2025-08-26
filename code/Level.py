@@ -16,12 +16,13 @@ class Level:
         self.window = window
         self.name = name
         self.game_mode = game_mode
-        self.entity_list: list[Entity] = []
+        self.bg_entity_list: list[Entity] = []
+        self.md_entity_list: list[Entity] = []
         self.timeout = 20000 # 20 segundos
         # Create Entities
-        self.entity_list.extend(EntityFactory.get_entity('Starfield')) # Background
+        self.bg_entity_list.extend(EntityFactory.get_entity('Starfield')) # Background
         pygame.time.set_timer(EVENT_PLANETS, 4000) # Background planets
-        # self.entity_list.append(EntityFactory.get_entity('Player1'))
+        self.md_entity_list.append(EntityFactory.get_entity('Player1'))
         # if game_mode == '2P':
         #     self.entity_list.append(EntityFactory.get_entity('Player2'))
 
@@ -30,9 +31,18 @@ class Level:
         clock = pygame.time.Clock()
         while True:
             clock.tick(60)
-            for ent in self.entity_list:
+
+            # Render
+            # 1st Background entities
+            for ent in self.bg_entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move(self.game_mode == '2P')
+
+            # 2nd Midground entities
+            for ent in self.md_entity_list:
+                self.window.blit(source=ent.surf, dest=ent.rect)
+                ent.move(self.game_mode == '2P')
+
 
             for event in pygame.event.get():
                 # Close window
@@ -41,12 +51,12 @@ class Level:
                     sys.exit()  # End pygame
 
                 if event.type == EVENT_PLANETS:
-                    self.entity_list.append(EntityFactory.get_entity('Planet', (WIN_WIDTH, random.randint(-15, WIN_HEIGHT + 10))))
+                    self.bg_entity_list.append(EntityFactory.get_entity('Planet', (WIN_WIDTH, random.randint(-15, WIN_HEIGHT + 10))))
 
             # print text
             self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', COLOR_TEXT_WHITE, (10, 5))
             self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 35))
-            self.level_text(14, f'Entities: {len(self.entity_list)}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 20))
+            self.level_text(14, f'Entities: {len(self.md_entity_list)}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 20))
             pygame.display.flip()
 
             # Degree timeout

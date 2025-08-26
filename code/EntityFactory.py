@@ -19,7 +19,7 @@ class EntityFactory:
             case 'Planet':
                 return Planet(f'Planet{random.randint(1,12)}.png', (WIN_WIDTH + 10, random.randint(-5, WIN_HEIGHT + 5)), 1, random.randint(1,4) )
             case 'Player1':
-                return Player('Player1', (10, WIN_HEIGHT / 2), 1)
+                return Player('Player1.png', (10, WIN_HEIGHT / 2), 1)
             case 'Player2':
                 return Player('Player2', (10, WIN_HEIGHT * 0.75), 1, keyboard=2)
             case 'Enemy1':

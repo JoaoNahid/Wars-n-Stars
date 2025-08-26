@@ -1,6 +1,7 @@
+import random
+
 import pygame
 
-from code.Background import Background
 from code.Entity import Entity
 
 
@@ -10,6 +11,7 @@ class Planet(Entity):
         super().__init__(name, position, speed)
         self.distance = distance
         self.surf = self.__apply_distance_effect()
+        self.surf = self.__resize_planet_based_on_distance()
 
     def move(self, two_players: bool = False):
         self.rect.centerx -= self.__get_speed_based_on_distance()
@@ -50,3 +52,19 @@ class Planet(Entity):
 
         del pixel_array
         return result
+
+    def __resize_planet_based_on_distance(self):
+        base_size_factors = {1: 1.0, 2: 0.8, 3: 0.6, 4: 0.4}
+        base_scale = base_size_factors.get(self.distance, 1.0)
+
+        variation = random.uniform(0.8, 1.2)
+        scale_factor = base_scale * variation
+
+        original_width, original_height = self.surf.get_size()
+        new_width = int(original_width * scale_factor)
+        new_height = int(original_height * scale_factor)
+
+        new_width = max(10, new_width)
+        new_height = max(10, new_height)
+
+        return pygame.transform.smoothscale(self.surf, (new_width, new_height))
