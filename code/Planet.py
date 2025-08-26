@@ -29,7 +29,7 @@ class Planet(Entity):
         return 1
 
     def __apply_distance_effect(self):
-        darkness_levels = {1: 0.0, 2: 0.3, 3: 0.6, 4: 0.8}
+        darkness_levels = {1: 0.3, 2: 0.5, 3: 0.7, 4: 0.8}
         darkness = darkness_levels.get(self.distance, 0.0)
 
         if darkness == 0:
