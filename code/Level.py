@@ -20,7 +20,7 @@ class Level:
         self.timeout = 20000 # 20 segundos
         # Create Entities
         self.entity_list.extend(EntityFactory.get_entity('Starfield')) # Background
-        pygame.time.set_timer(EVENT_PLANETS, 1000) # Background planets
+        pygame.time.set_timer(EVENT_PLANETS, 4000) # Background planets
         # self.entity_list.append(EntityFactory.get_entity('Player1'))
         # if game_mode == '2P':
         #     self.entity_list.append(EntityFactory.get_entity('Player2'))
