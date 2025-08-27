@@ -7,7 +7,9 @@ import pygame
 class Game:
 
     def __init__(self):
+        pygame.mixer.pre_init(44100, -16, 2, 512) # init mixer
         pygame.init()
+        pygame.mixer.set_num_channels(16)
         self.window = pygame.display.set_mode(size=(WIN_WIDTH, WIN_HEIGHT))
         self.action = None
 
