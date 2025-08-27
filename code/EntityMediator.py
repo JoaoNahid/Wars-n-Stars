@@ -30,7 +30,6 @@ class EntityMediator:
     def verify_collision(entity_list: list[Entity]):
         for i in range(len(entity_list)):
             ent = entity_list[i]
-            EntityMediator.__verify_window_overflow(ent)
             for j in range(i+1, len(entity_list)): # i + 1 prevent duplicated verification
                 ent_to_compare = entity_list[j]
                 if ent != ent_to_compare:
