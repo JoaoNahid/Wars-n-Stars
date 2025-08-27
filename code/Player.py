@@ -12,6 +12,8 @@ class Player(Entity):
         self.keyboard = keyboard
         self.health = ENTITY_HEALTH[self.name]
         self.damage = ENTITY_DAMAGE[self.name]
+        self.death_sound = pygame.mixer.Sound("./assets/sounds/explosion.wav")
+        self.death_sound.set_volume(1)
 
     def update(self, ):
         pass
@@ -38,3 +40,7 @@ class Player(Entity):
 
     def get_name(self):
         return Path(self.name).stem
+
+    def die(self):
+        channel = pygame.mixer.Channel(2)
+        channel.play(self.death_sound)

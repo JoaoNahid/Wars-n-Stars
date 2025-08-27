@@ -66,3 +66,6 @@ class Planet(Entity):
         new_height = max(10, new_height)
 
         return pygame.transform.smoothscale(self.surf, (new_width, new_height))
+
+    def die(self):
+        pass

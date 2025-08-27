@@ -11,7 +11,13 @@ class Entity(ABC):
         self.surf = pygame.image.load('./assets/images/' + file_path).convert_alpha()
         self.rect = self.surf.get_rect(left=position[0], top=position[1])
         self.speed = speed
+        self.death_sound = None
+        self.health = None
 
     @abstractmethod #decorator
     def move(self, two_players: bool = False):
+        pass
+
+    @abstractmethod
+    def die(self):
         pass

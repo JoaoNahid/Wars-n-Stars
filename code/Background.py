@@ -17,3 +17,6 @@ class Background(Entity):
         self.rect.centerx -= self.speed
         if self.rect.right <= 0:
             self.rect.left = WIN_WIDTH
+
+    def die(self):
+        pass
