@@ -6,7 +6,7 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, WIN_WIDTH, EVENT_OBSTACLES, COLOR_TEXT_GREEN, \
-    FONT_JEDI
+    FONT_JEDI, COLOR_TEXT_GREENYELLOW
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
@@ -53,7 +53,10 @@ class Level:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move(self.game_mode == '2P')
                 if isinstance(ent, Player):
-                    self.level_text(16, f'HEALTH: {ent.get_health()}', COLOR_TEXT_GREEN, (10, 20))
+                    if ent.name == 'Player1':
+                        self.level_text(16, f'HEALTH P1: {ent.get_health()}', COLOR_TEXT_GREEN, (10, 20))
+                    elif ent.name == 'Player2':
+                        self.level_text(16, f'HEALTH P2: {ent.get_health()}', COLOR_TEXT_GREENYELLOW, (10, 35))
 
 
             for event in pygame.event.get():
