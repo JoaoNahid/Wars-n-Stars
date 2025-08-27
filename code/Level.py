@@ -20,6 +20,7 @@ class Level:
         self.name = name
         self.game_mode = game_mode
         self.score = 0 #
+        self.speed_obstacles_max_value = 4
 
         # Create Entities list
         self.bg_entity_list: list[Entity] = []
@@ -69,7 +70,7 @@ class Level:
                     self.bg_entity_list.append(EntityFactory.get_entity('Planet'))
 
                 if event.type == EVENT_OBSTACLES:
-                    self.md_entity_list.append(EntityFactory.get_entity('Obstacle'))
+                    self.md_entity_list.append(EntityFactory.get_entity('Obstacle', self.speed_obstacles_max_value))
 
             # print text
             self.level_text(14, f'{self.name} - Score: {self.score}', COLOR_TEXT_WHITE, (10, 5))
@@ -84,7 +85,7 @@ class Level:
             # Score
             self.score += 1
             if self.score % 1000 == 0:
-                EntityMediator.add_speed(entity_list=self.md_entity_list)
+                self.speed_obstacles_max_value += 1
                 EntityMediator.add_speed(entity_list=self.bg_entity_list)
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
