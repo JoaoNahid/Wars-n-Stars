@@ -41,6 +41,9 @@ class Player(Entity):
     def get_name(self):
         return Path(self.name).stem
 
+    def get_health(self):
+        return self.health
+
     def die(self):
         channel = pygame.mixer.Channel(2)
         channel.play(self.death_sound)
