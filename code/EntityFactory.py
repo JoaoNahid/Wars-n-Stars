@@ -21,7 +21,7 @@ class EntityFactory:
             case 'Player1':
                 return Player('Player1', 'Player1.png', (10, WIN_HEIGHT / 2), 1)
             case 'Player2':
-                return Player('Player2', 'Player2', (10, WIN_HEIGHT * 0.75), 1, keyboard=2)
+                return Player('Player2', 'Player2.png', (10, WIN_HEIGHT * 0.75), 1, keyboard=2)
             case 'Obstacle':
                 obstacle = EntityFactory.define_obstacle()
                 path = f'asteroids/{obstacle["type"]}{random.randint(obstacle['range'][0], obstacle['range'][1])}.png'
