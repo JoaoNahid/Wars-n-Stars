@@ -12,11 +12,12 @@ class Obstacle(Entity):
         super().__init__(name, file_path, position, speed)
         self.health = ENTITY_HEALTH[self.name]
         self.damage = ENTITY_DAMAGE[self.name]
+        self.speed = random.randint(speed - 3, speed)
         self.death_sound = pygame.mixer.Sound('./assets/sounds/rock-breaking.wav')
         self.death_sound.set_volume(0.1)
 
     def move(self, two_players: bool = False):
-        self.rect.centerx -= random.randint(1,4)
+        self.rect.centerx -= self.speed
         pass
 
     def die(self):
