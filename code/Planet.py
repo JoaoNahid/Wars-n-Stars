@@ -7,8 +7,8 @@ from code.Entity import Entity
 
 class Planet(Entity):
 
-    def __init__(self, name: str, position: tuple, speed: int, distance: int):
-        super().__init__(name, position, speed)
+    def __init__(self, name: str, file_path: str, position: tuple, speed: int, distance: int):
+        super().__init__(name, file_path, position, speed)
         self.distance = distance
         self.surf = self.__apply_distance_effect()
         self.surf = self.__resize_planet_based_on_distance()
@@ -19,17 +19,15 @@ class Planet(Entity):
     def __get_speed_based_on_distance(self) -> int:
         match self.distance:
             case 1:
-                return 4
-            case 2:
                 return 3
-            case 3:
+            case 2:
                 return 2
-            case 4:
+            case 3:
                 return 1
         return 1
 
     def __apply_distance_effect(self):
-        darkness_levels = {1: 0.3, 2: 0.5, 3: 0.7, 4: 0.8}
+        darkness_levels = {1: 0.5, 2: 0.7, 3: 0.8}
         darkness = darkness_levels.get(self.distance, 0.0)
 
         if darkness == 0:
@@ -54,7 +52,7 @@ class Planet(Entity):
         return result
 
     def __resize_planet_based_on_distance(self):
-        base_size_factors = {1: 1.0, 2: 0.8, 3: 0.6, 4: 0.4}
+        base_size_factors = {1: 0.8, 2: 0.6, 3: 0.4}
         base_scale = base_size_factors.get(self.distance, 1.0)
 
         variation = random.uniform(0.8, 1.2)
