@@ -22,6 +22,24 @@ ENTITY_SPEED = {
     'Player2': 3,
 }
 
+# Health
+ENTITY_HEALTH = {
+    'Player1': 1000,
+    'Player2': 1000,
+    'sm_asteroid': 100,
+    'md_asteroid': 300,
+    'lg_asteroid': 800,
+}
+
+# Damage
+ENTITY_DAMAGE = {
+    'Player1': 1000,
+    'Player2': 1000,
+    'sm_asteroid': 100,
+    'md_asteroid': 300,
+    'lg_asteroid': 800,
+}
+
 # Event
 EVENT_PLANETS = pygame.USEREVENT
 EVENT_OBSTACLES = pygame.USEREVENT +1

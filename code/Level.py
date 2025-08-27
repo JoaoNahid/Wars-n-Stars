@@ -8,6 +8,7 @@ from pygame.font import Font
 from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, WIN_WIDTH, EVENT_OBSTACLES
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
+from code.EntityMediator import EntityMediator
 
 
 class Level:
@@ -16,12 +17,12 @@ class Level:
         self.window = window
         self.name = name
         self.game_mode = game_mode
-        self.timeout = 20000 #
+        self.score = 0 #
 
         # Create Entities list
         self.bg_entity_list: list[Entity] = []
         self.md_entity_list: list[Entity] = []
-        self.foreground_list: list[Entity] = [] # for obstacles and effects (future implementation)
+        self.foreground_list: list[Entity] = [] # for effects (future implementation)
         # Background
         self.bg_entity_list.extend(EntityFactory.get_entity('Starfield')) # Background
         pygame.time.set_timer(EVENT_PLANETS, 4000) # Background planets
@@ -50,10 +51,6 @@ class Level:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move(self.game_mode == '2P')
 
-            for ent in self.foreground_list:
-                self.window.blit(source=ent.surf, dest=ent.rect)
-                ent.move(self.game_mode == '2P')
-
 
             for event in pygame.event.get():
                 # Close window
@@ -65,15 +62,22 @@ class Level:
                     self.bg_entity_list.append(EntityFactory.get_entity('Planet'))
 
                 if event.type == EVENT_OBSTACLES:
-                    self.foreground_list.append(EntityFactory.get_entity('Obstacle'))
+                    self.md_entity_list.append(EntityFactory.get_entity('Obstacle'))
 
             # print text
-            self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', COLOR_TEXT_WHITE, (10, 5))
+            self.level_text(14, f'{self.name} - Score: {self.score}', COLOR_TEXT_WHITE, (10, 5))
             self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 25))
             pygame.display.flip()
 
-            # Degree timeout
-            self.timeout -= 1
+            # Collision
+            EntityMediator.verify_collision(entity_list=self.md_entity_list)
+            EntityMediator.verify_health(entity_list=self.md_entity_list)
+
+            # Score
+            self.score += 1
+            if self.score % 100 == 0:
+                EntityMediator.add_speed(entity_list=self.md_entity_list)
+                EntityMediator.add_speed(entity_list=self.bg_entity_list)
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
         text_font: Font = pygame.font.SysFont(name='Montserrat', size=text_size)
