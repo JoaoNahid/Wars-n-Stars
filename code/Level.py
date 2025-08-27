@@ -5,10 +5,12 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, WIN_WIDTH, EVENT_OBSTACLES
+from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, WIN_WIDTH, EVENT_OBSTACLES, COLOR_TEXT_GREEN, \
+    FONT_JEDI
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
+from code.Player import Player
 
 
 class Level:
@@ -50,6 +52,8 @@ class Level:
             for ent in self.md_entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move(self.game_mode == '2P')
+                if isinstance(ent, Player):
+                    self.level_text(16, f'HEALTH: {ent.get_health()}', COLOR_TEXT_GREEN, (10, 20))
 
 
             for event in pygame.event.get():
@@ -81,7 +85,7 @@ class Level:
                 EntityMediator.add_speed(entity_list=self.bg_entity_list)
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
-        text_font: Font = pygame.font.SysFont(name='Montserrat', size=text_size)
+        text_font: Font = pygame.font.SysFont(name=FONT_JEDI, size=text_size)
         text_surf: Surface = text_font.render(text, True, text_color)
         text_rect: Rect = text_surf.get_rect(left=text_pos[0], top=text_pos[1])
         self.window.blit(source=text_surf, dest=text_rect)
