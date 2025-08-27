@@ -44,6 +44,7 @@ class EntityMediator:
                 entity_list.remove(ent)
 
     @staticmethod
-    def add_speed(entity_list: list[Entity]):
+    def add_speed(entity_list: list[Entity], increment: int = 1):
         for ent in entity_list:
-            ent.speed += 1
+                ent.speed += increment
+
