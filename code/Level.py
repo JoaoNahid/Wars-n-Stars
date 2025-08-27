@@ -70,6 +70,7 @@ class Level:
             pygame.display.flip()
 
             # Collision
+            EntityMediator.verify_window_overflow(entity_list=self.md_entity_list)
             EntityMediator.verify_collision(entity_list=self.md_entity_list)
             EntityMediator.verify_health(entity_list=self.md_entity_list)
 
