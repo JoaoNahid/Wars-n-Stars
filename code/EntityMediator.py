@@ -13,10 +13,10 @@ class EntityMediator:
         ent.health -= damage
 
     @staticmethod
-    def __verify_window_overflow(ent: Entity):
-        if isinstance(ent, Obstacle):
-            if ent.rect.right < 0:
-                ent.health = 0
+    def verify_window_overflow(entity_list: list[Entity]):
+        for ent in entity_list:
+            if isinstance(ent, Obstacle) and ent.rect.right < 0:
+                entity_list.remove(ent)
 
     @staticmethod
     def __verify_collision_between_entities(ent1, ent2):
