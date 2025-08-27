@@ -32,10 +32,8 @@ class Player(Entity):
             key_left = pygame.K_a if self.keyboard == 1 else pygame.K_LEFT
             key_right = pygame.K_d if self.keyboard == 1 else pygame.K_RIGHT
             if pressed_key[key_left] and self.rect.left > 0:
-                print('left')
                 self.rect.centerx -= ENTITY_SPEED[self.get_name()]
             if pressed_key[key_right] and self.rect.right < WIN_WIDTH:
-                print('right')
                 self.rect.centerx += ENTITY_SPEED[self.get_name()]
 
     def get_name(self):
