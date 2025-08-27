@@ -42,3 +42,8 @@ class EntityMediator:
         for ent in entity_list:
             if isinstance(ent, (Player, Obstacle)) and ent.health <= 0:
                 entity_list.remove(ent)
+
+    @staticmethod
+    def add_speed(entity_list: list[Entity]):
+        for ent in entity_list:
+            ent.speed += 1

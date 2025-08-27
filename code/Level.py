@@ -75,7 +75,7 @@ class Level:
 
             # Score
             self.score += 1
-            if self.score % 100 == 0:
+            if self.score % 1000 == 0:
                 EntityMediator.add_speed(entity_list=self.md_entity_list)
                 EntityMediator.add_speed(entity_list=self.bg_entity_list)
 
