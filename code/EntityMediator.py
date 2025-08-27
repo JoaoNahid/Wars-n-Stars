@@ -40,6 +40,7 @@ class EntityMediator:
     def verify_health(entity_list: list[Entity]):
         for ent in entity_list:
             if isinstance(ent, (Player, Obstacle)) and ent.health <= 0:
+                ent.die()
                 entity_list.remove(ent)
 
     @staticmethod
