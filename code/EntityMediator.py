@@ -1,6 +1,7 @@
 import pygame
 
 from code.Const import WIN_WIDTH
+from code.Cure import Cure
 from code.Obstacle import Obstacle
 from code.Entity import Entity
 from code.Player import Player
@@ -13,9 +14,14 @@ class EntityMediator:
         ent.health -= damage
 
     @staticmethod
+    def heal_player(player, cure):
+        player.health += cure.health
+        cure.health = 0
+
+    @staticmethod
     def verify_window_overflow(entity_list: list[Entity]):
         for ent in entity_list:
-            if isinstance(ent, Obstacle) and ent.rect.right < 0:
+            if isinstance(ent, (Obstacle, Cure)) and ent.rect.right < 0:
                 entity_list.remove(ent)
 
     @staticmethod
@@ -24,6 +30,14 @@ class EntityMediator:
             if pygame.Rect.colliderect(ent1.rect, ent2.rect):
                 EntityMediator.apply_damage(ent1, ent2.damage)
                 EntityMediator.apply_damage(ent2, ent1.damage)
+        if isinstance(ent1, Cure) and isinstance(ent2, Player):
+            if pygame.Rect.colliderect(ent1.rect, ent2.rect):
+                EntityMediator.heal_player(ent2, ent1)
+        if isinstance(ent2, Cure) and isinstance(ent1, Player):
+            if pygame.Rect.colliderect(ent1.rect, ent2.rect):
+                EntityMediator.heal_player(ent1, ent2)
+
+
 
 
     @staticmethod
@@ -39,7 +53,7 @@ class EntityMediator:
     @staticmethod
     def verify_health(entity_list: list[Entity]):
         for ent in entity_list:
-            if isinstance(ent, (Player, Obstacle)) and ent.health <= 0:
+            if isinstance(ent, (Player, Obstacle, Cure)) and ent.health <= 0:
                 ent.die()
                 entity_list.remove(ent)
 

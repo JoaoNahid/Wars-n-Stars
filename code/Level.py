@@ -6,7 +6,7 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, WIN_WIDTH, EVENT_OBSTACLES, COLOR_TEXT_GREEN, \
-    FONT_JEDI, COLOR_TEXT_GREENYELLOW
+    FONT_JEDI, COLOR_TEXT_GREENYELLOW, EVENT_HEAL
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
@@ -39,6 +39,8 @@ class Level:
         ## Obstacles
         pygame.time.set_timer(EVENT_OBSTACLES, 2000) # Background planets
 
+        ## Obstacles
+        pygame.time.set_timer(EVENT_HEAL, 8000)
 
 
     def run(self):
@@ -50,12 +52,12 @@ class Level:
             # 1st Background entities
             for ent in self.bg_entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
-                ent.move(self.game_mode == '2P')
+                ent.move()
 
             # 2nd Midground entities
             for ent in self.md_entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
-                ent.move(self.game_mode == '2P')
+                ent.move()
                 if isinstance(ent, Player):
                     if ent.name == 'Player1':
                         self.level_text(16, f'HEALTH P1: {ent.get_health()}', COLOR_TEXT_GREEN, (10, 20))
@@ -69,15 +71,22 @@ class Level:
                     pygame.quit()  # Close window
                     sys.exit()  # End pygame
 
+                ## Add planets for background
                 if event.type == EVENT_PLANETS:
                     self.bg_entity_list.append(EntityFactory.get_entity('Planet'))
 
+                # Add obstacles
                 if event.type == EVENT_OBSTACLES:
                     self.md_entity_list.append(EntityFactory.get_entity('Obstacle', self.speed_obstacles_max_value))
 
+                # Add Heal
+                if event.type == EVENT_HEAL:
+                    self.md_entity_list.append(EntityFactory.get_entity('Cure'))
+
             # print text
             self.level_text(14, f'{self.name} - Score: {self.score}', COLOR_TEXT_WHITE, (10, 5))
-            self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 25))
+            self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 45))
+            self.level_text(14, f'md Entities: {len(self.md_entity_list)}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 25))
             pygame.display.flip()
 
             # Collision

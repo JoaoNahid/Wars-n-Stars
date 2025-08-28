@@ -15,7 +15,7 @@ class Entity(ABC):
         self.health = None
 
     @abstractmethod #decorator
-    def move(self, two_players: bool = False):
+    def move(self):
         pass
 
     @abstractmethod

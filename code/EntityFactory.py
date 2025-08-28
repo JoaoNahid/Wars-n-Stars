@@ -2,6 +2,7 @@ import random
 
 from code.Background import Background
 from code.Const import WIN_WIDTH, ENTITY_SPEED, WIN_HEIGHT
+from code.Cure import Cure
 from code.Obstacle import Obstacle
 from code.Planet import Planet
 from code.Player import Player
@@ -26,6 +27,8 @@ class EntityFactory:
                 obstacle = EntityFactory.define_obstacle()
                 path = f'asteroids/{obstacle["type"]}{random.randint(obstacle['range'][0], obstacle['range'][1])}.png'
                 return Obstacle(obstacle["type"], path, (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT - 30)), speed)
+            case 'Cure':
+                return Cure('Cure', 'sprite.png', (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT - 30)), 2)
 
     @staticmethod
     def define_obstacle():
