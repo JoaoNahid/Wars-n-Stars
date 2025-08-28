@@ -4,6 +4,9 @@ from code.Menu import Menu
 
 import pygame
 
+from code.Tutorial import Tutorial
+
+
 class Game:
 
     def __init__(self):
@@ -27,6 +30,9 @@ class Game:
                 case 'new game 2p':
                     level = Level(self.window, 'Level 1', '2P')
                     level.run()
+                case 'tutorial':
+                    tutorial = Tutorial(self.window)
+                    tutorial.run()
                 case 'exit':
                     self.quit()
                 case _:
