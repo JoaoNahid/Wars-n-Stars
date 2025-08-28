@@ -12,10 +12,12 @@ class Tutorial(MenuScreen):
         super().__init__(window)
         self.surf = pygame.image.load('./assets/images/Starfield.jpg').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
+        self.keys_to_leave = [pygame.K_ESCAPE, pygame.K_BACKSPACE, pygame.K_SPACE, pygame.K_RETURN]
 
     def run(self):
         clock = pygame.time.Clock()
-        while True:
+        run_tutorial = True
+        while run_tutorial:
             clock.tick(60)
             self.window.blit(source=self.surf, dest=self.rect)
             # Text
@@ -34,11 +36,15 @@ class Tutorial(MenuScreen):
                 font_size += 1
                 pos_y += font_size * 1
 
-            # Eventos
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key in self.keys_to_leave:
+                        print('ESC pressed')
+                        run_tutorial = False
 
             pygame.display.flip()
 
