@@ -26,14 +26,17 @@ class Level:
         self.bg_entity_list: list[Entity] = []
         self.md_entity_list: list[Entity] = []
         self.foreground_list: list[Entity] = [] # for effects (future implementation)
-        # Background
+
+        ## Background
         self.bg_entity_list.extend(EntityFactory.get_entity('Starfield')) # Background
         pygame.time.set_timer(EVENT_PLANETS, 4000) # Background planets
-        #Players
+
+        ## Players
         self.md_entity_list.append(EntityFactory.get_entity('Player1'))
         if game_mode == '2P':
             self.md_entity_list.append(EntityFactory.get_entity('Player2'))
-        #Obstacles
+
+        ## Obstacles
         pygame.time.set_timer(EVENT_OBSTACLES, 2000) # Background planets
 
 
