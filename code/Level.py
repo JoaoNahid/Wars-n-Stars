@@ -94,6 +94,12 @@ class Level:
             EntityMediator.verify_collision(entity_list=self.md_entity_list)
             EntityMediator.verify_health(entity_list=self.md_entity_list)
 
+            # Verify game over
+            if EntityMediator.game_over(self.players):
+                if self.game_mode != '2P':
+                    HighScoreService.create_or_update_score(self.score)
+                break
+
             # Score
             self.score += 1
             if self.score % 1000 == 0:

@@ -67,3 +67,10 @@ class EntityMediator:
         for ent in entity_list:
                 ent.speed += increment
 
+    @staticmethod
+    def game_over(players) -> bool:
+        total_health = 0
+        for player in players.values():
+            total_health += player.get_health()
+        return total_health == 0
+
