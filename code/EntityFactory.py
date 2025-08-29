@@ -28,7 +28,7 @@ class EntityFactory:
                 path = f'asteroids/{obstacle["type"]}{random.randint(obstacle['range'][0], obstacle['range'][1])}.png'
                 return Obstacle(obstacle["type"], path, (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT - 30)), speed)
             case 'Cure':
-                return Cure('Cure', 'sprite.png', (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT - 30)), 2)
+                return Cure('Cure', f'sprite{random.randint(1,3)}.png', (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT - 30)), 2)
 
     @staticmethod
     def define_obstacle():
