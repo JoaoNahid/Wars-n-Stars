@@ -1,11 +1,8 @@
 from abc import ABC, abstractmethod
-from locale import windows_locale
 
 import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
-
-from code.Const import FONT_JEDI
 
 
 class MenuScreen(ABC):
