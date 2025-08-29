@@ -15,6 +15,7 @@ class Menu:
         self.rect = self.surf.get_rect(left=0, top=0)
         self.menu_options = ('New Game 1P', 'New Game 2P', 'Score', 'Tutorial', 'Exit' )
 
+
     def run(self) -> str:
         pygame.mixer_music.load('./assets/sounds/mars.ogg')
         pygame.mixer_music.play(-1)
@@ -24,16 +25,15 @@ class Menu:
             self.menu_text(65, "WARS'N", COLOR_TEXT_YELLOW, ((WIN_WIDTH / 2), 70), FONT_JEDI_OUTLINE)
             self.menu_text(65, "STARS", COLOR_TEXT_YELLOW, ((WIN_WIDTH / 2), 120), FONT_JEDI_OUTLINE)
 
-            font_size = 15
+            font_size = 25
             pos_y = 200
             for i in range(len(self.menu_options)):
                 if i == self.selected_option:
-                    self.menu_text(font_size, f'- {self.menu_options[i]}' , COLOR_TEXT_YELLOW, ((WIN_WIDTH / 2), pos_y), FONT_JEDI)
+                    self.menu_text(font_size, f'{self.menu_options[i]}' , COLOR_TEXT_YELLOW, ((WIN_WIDTH / 2), pos_y), FONT_JEDI)
                 else:
-                    self.menu_text(font_size, self.menu_options[i], COLOR_TEXT_YELLOW, ((WIN_WIDTH / 2), pos_y), FONT_JEDI)
+                    self.menu_text(font_size, self.menu_options[i], COLOR_TEXT_WHITE, ((WIN_WIDTH / 2), pos_y), FONT_JEDI)
 
                 #  calculate next pos_y
-                font_size += 10
                 pos_y += font_size * 1
 
             pygame.display.flip()
