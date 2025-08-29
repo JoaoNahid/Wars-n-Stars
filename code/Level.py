@@ -22,6 +22,7 @@ class Level:
         self.game_mode = game_mode
         self.score = 0 #
         self.speed_obstacles_max_value = 4
+        self.keys_to_leave = [pygame.K_ESCAPE, pygame.K_BACKSPACE]
 
         # Create Entities list
         self.bg_entity_list: list[Entity] = []
@@ -51,7 +52,8 @@ class Level:
         pygame.mixer_music.set_volume(0.3)
         pygame.mixer_music.play(-1)
         clock = pygame.time.Clock()
-        while True:
+        is_running = True;
+        while is_running:
             clock.tick(60)
 
             # Render Entities
@@ -76,6 +78,10 @@ class Level:
                 if event.type == pygame.QUIT:
                     pygame.quit()  # Close window
                     sys.exit()  # End pygame
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key in self.keys_to_leave:
+                        is_running = False
 
                 ## Add planets for background
                 if event.type == EVENT_PLANETS:
@@ -112,7 +118,7 @@ class Level:
             if EntityMediator.game_over(self.players):
                 if self.game_mode != '2P':
                     HighScoreService.create_or_update_score(self.score)
-                break
+                is_running = False
 
             # Score
             self.score += 1
