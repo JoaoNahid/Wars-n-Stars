@@ -1,6 +1,6 @@
 import pygame
 
-from code.Const import WIN_WIDTH
+from code.Const import WIN_WIDTH, ENTITY_HEALTH
 from code.Cure import Cure
 from code.Obstacle import Obstacle
 from code.Entity import Entity
