@@ -16,6 +16,8 @@ class Menu:
         self.menu_options = ('New Game 1P', 'New Game 2P', 'Score', 'Tutorial', 'Exit' )
 
     def run(self) -> str:
+        pygame.mixer_music.load('./assets/sounds/mars.ogg')
+        pygame.mixer_music.play(-1)
         while True:
             # Draw Elements
             self.window.blit(source=self.surf, dest=self.rect)
