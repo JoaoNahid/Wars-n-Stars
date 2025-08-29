@@ -33,9 +33,11 @@ class Level:
         pygame.time.set_timer(EVENT_PLANETS, 4000) # Background planets
 
         ## Players
-        self.md_entity_list.append(EntityFactory.get_entity('Player1'))
+        self.players = {'player1': EntityFactory.get_entity('Player1')}
+        self.md_entity_list.append(self.players['player1'])
         if game_mode == '2P':
-            self.md_entity_list.append(EntityFactory.get_entity('Player2'))
+            self.players['player2'] = EntityFactory.get_entity('Player2')
+            self.md_entity_list.append(self.players['player2'])
 
         ## Obstacles
         pygame.time.set_timer(EVENT_OBSTACLES, 3800) # Background planets
@@ -61,9 +63,9 @@ class Level:
                 ent.move()
                 if isinstance(ent, Player):
                     if ent.name == 'Player1':
-                        self.level_text(16, f'HEALTH P1: {ent.get_health()}', COLOR_TEXT_GREEN, (10, 20))
+                        self.players['player1'] = ent
                     elif ent.name == 'Player2':
-                        self.level_text(16, f'HEALTH P2: {ent.get_health()}', COLOR_TEXT_GREENYELLOW, (10, 35))
+                        self.players['player2'] = ent
 
 
             for event in pygame.event.get():
