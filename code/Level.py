@@ -37,10 +37,10 @@ class Level:
             self.md_entity_list.append(EntityFactory.get_entity('Player2'))
 
         ## Obstacles
-        pygame.time.set_timer(EVENT_OBSTACLES, 2000) # Background planets
+        pygame.time.set_timer(EVENT_OBSTACLES, 3800) # Background planets
 
         ## Obstacles
-        pygame.time.set_timer(EVENT_HEAL, 8000)
+        pygame.time.set_timer(EVENT_HEAL, 8500)
 
 
     def run(self):
