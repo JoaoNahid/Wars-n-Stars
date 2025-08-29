@@ -11,6 +11,7 @@ from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
 from code.Player import Player
+from services.HighScoreService import HighScoreService
 
 
 class Level:
