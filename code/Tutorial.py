@@ -43,7 +43,6 @@ class Tutorial(MenuScreen):
 
                 if event.type == pygame.KEYDOWN:
                     if event.key in self.keys_to_leave:
-                        print('ESC pressed')
                         run_tutorial = False
 
             pygame.display.flip()
