@@ -16,6 +16,8 @@ class EntityMediator:
     @staticmethod
     def heal_player(player, cure):
         player.health += cure.health
+        if player.health > ENTITY_HEALTH[player.name]:
+            player.reset_life()
         cure.health = 0
 
     @staticmethod
