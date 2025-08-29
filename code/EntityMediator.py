@@ -13,6 +13,8 @@ class EntityMediator:
     @staticmethod
     def apply_damage(ent: Entity, damage: int):
         ent.health -= damage
+        if ent.health < 0:
+            ent.health = 0
 
     @staticmethod
     def heal_player(player, cure):
