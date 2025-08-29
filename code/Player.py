@@ -40,6 +40,9 @@ class Player(Entity):
     def get_health(self):
         return self.health
 
+    def reset_life(self):
+        self.health = ENTITY_HEALTH[self.name]
+
     def die(self):
         channel = pygame.mixer.Channel(2)
         channel.play(self.death_sound)
