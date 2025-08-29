@@ -5,11 +5,14 @@ from code.Menu import Menu
 import pygame
 
 from code.Tutorial import Tutorial
+from database.connection import initialize_database, close_database
 
 
 class Game:
 
     def __init__(self):
+        # Database
+        initialize_database()
         pygame.mixer.pre_init(44100, -16, 2, 512) # init mixer
         pygame.init()
         pygame.mixer.set_num_channels(16)
@@ -17,26 +20,30 @@ class Game:
         self.action = None
 
     def run(self):
-        pygame.mixer_music.load('./assets/sounds/theme-song.mp3')
-        pygame.mixer_music.play(-1)
-        while True:
-            menu = Menu(self.window)
-            self.action = menu.run()
+        try:
+            while True:
+                menu = Menu(self.window)
+                self.action = menu.run()
 
-            match self.action.lower():
-                case 'new game 1p':
-                    level = Level(self.window, 'Level 1', '1P')
-                    level.run()
-                case 'new game 2p':
-                    level = Level(self.window, 'Level 1', '2P')
-                    level.run()
-                case 'tutorial':
-                    tutorial = Tutorial(self.window)
-                    tutorial.run()
-                case 'exit':
-                    self.quit()
-                case _:
-                    pass
+                match self.action.lower():
+                    case 'new game 1p':
+                        level = Level(self.window, 'Level 1', '1P')
+                        level.run()
+                    case 'new game 2p':
+                        level = Level(self.window, 'Level 1', '2P')
+                        level.run()
+                    case 'tutorial':
+                        tutorial = Tutorial(self.window)
+                        tutorial.run()
+                    case 'exit':
+                        self.quit()
+                    case _:
+                        pass
+        except Exception as e:
+            print('Failed to load...')
+        finally:
+            close_database()
+
 
     @staticmethod
     def quit():
