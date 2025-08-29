@@ -4,6 +4,7 @@ from code.Const import WIN_WIDTH, ENTITY_HEALTH
 from code.Cure import Cure
 from code.Obstacle import Obstacle
 from code.Entity import Entity
+from code.Planet import Planet
 from code.Player import Player
 
 
@@ -23,7 +24,7 @@ class EntityMediator:
     @staticmethod
     def verify_window_overflow(entity_list: list[Entity]):
         for ent in entity_list:
-            if isinstance(ent, (Obstacle, Cure)) and ent.rect.right < 0:
+            if isinstance(ent, (Obstacle, Cure, Planet)) and ent.rect.right < 0:
                 entity_list.remove(ent)
 
     @staticmethod
