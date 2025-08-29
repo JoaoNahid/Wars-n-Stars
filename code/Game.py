@@ -4,6 +4,7 @@ from code.Menu import Menu
 
 import pygame
 
+from code.Score import Score
 from code.Tutorial import Tutorial
 from database.connection import initialize_database, close_database
 
@@ -35,6 +36,9 @@ class Game:
                     case 'tutorial':
                         tutorial = Tutorial(self.window)
                         tutorial.run()
+                    case 'score':
+                        score = Score(self.window)
+                        score.run()
                     case 'exit':
                         self.quit()
                     case _:
