@@ -13,8 +13,7 @@ class Menu:
         self.selected_option = 0
         self.surf = pygame.image.load('./assets/images/Starfield.jpg').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
-
-        self.menu_options = ('New Game 1P', 'New Game 2P', 'Score', 'Exit' )
+        self.menu_options = ('New Game 1P', 'New Game 2P', 'Score', 'Tutorial', 'Exit' )
 
     def run(self) -> str:
         while True:
