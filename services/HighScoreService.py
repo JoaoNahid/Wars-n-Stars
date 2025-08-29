@@ -30,3 +30,12 @@ class HighScoreService:
         except Exception as e:
             print(f"Fail to update high score: {e}")
             raise
+
+    @staticmethod
+    def get_score():
+        try:
+            score = HighScore.select().first()
+            return score
+        except Exception as e:
+            print(f'Failed to load score: {e}')
+            return None
