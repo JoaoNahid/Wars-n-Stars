@@ -20,7 +20,7 @@ class Score(MenuScreen):
         run_score = True
         while run_score:
             self.window.blit(source=self.surf, dest=self.rect)
-            text_surf = self.mount_text(40, f'High Score: {self.score.score} ly', COLOR_TEXT_YELLOW, FONT_JEDI)
+            text_surf = self.mount_text(35, f'High Score: {self.score.score} ly', COLOR_TEXT_YELLOW, FONT_JEDI)
             position = text_surf.get_rect(center=(WIN_WIDTH / 2, WIN_HEIGHT / 2))
             self.window.blit(source=text_surf, dest=position)
 
