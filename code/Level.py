@@ -7,11 +7,11 @@ from pygame.font import Font
 
 from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, WIN_WIDTH, EVENT_OBSTACLES, COLOR_TEXT_GREEN, \
     FONT_JEDI, COLOR_TEXT_GREENYELLOW, EVENT_HEAL
+from code.DBProxy import DBProxy
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
 from code.Player import Player
-from services.HighScoreService import HighScoreService
 
 
 class Level:
@@ -20,9 +20,15 @@ class Level:
         self.window = window
         self.name = name
         self.game_mode = game_mode
-        self.score = 0 #
         self.speed_obstacles_max_value = 4
         self.keys_to_leave = [pygame.K_ESCAPE, pygame.K_BACKSPACE]
+
+        # Database
+        self.db = DBProxy('highscore')
+
+        #score
+        self.score = 0 # current score
+        self.highscore = self.db.get_score()
 
         # Create Entities list
         self.bg_entity_list: list[Entity] = []
@@ -116,8 +122,8 @@ class Level:
 
             # Verify game over
             if EntityMediator.game_over(self.players):
-                if self.game_mode != '2P':
-                    HighScoreService.create_or_update_score(self.score)
+                if self.game_mode != '2P' and self.score > self.highscore:
+                    self.db.update_or_create_score(self.score)
                 is_running = False
 
             # Score

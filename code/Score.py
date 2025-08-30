@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from code.Const import COLOR_TEXT_YELLOW, FONT_JEDI, WIN_WIDTH, WIN_HEIGHT
+from code.DBProxy import DBProxy
 from code.MenuScreen import MenuScreen
 from services.HighScoreService import HighScoreService
 
@@ -14,13 +15,17 @@ class Score(MenuScreen):
         self.rect = self.surf.get_rect(left=0, top=0)
         self.keys_to_leave = [pygame.K_ESCAPE, pygame.K_BACKSPACE, pygame.K_SPACE, pygame.K_RETURN]
 
-        self.score = HighScoreService().get_score()
+        # Database
+        self.db = DBProxy('highscore')
+
+        # score
+        self.score = self.db.get_score()
 
     def run(self):
         run_score = True
         while run_score:
             self.window.blit(source=self.surf, dest=self.rect)
-            text_surf = self.mount_text(35, f'High Score: {self.score.score} ly', COLOR_TEXT_YELLOW, FONT_JEDI)
+            text_surf = self.mount_text(35, f'High Score: {self.score} ly', COLOR_TEXT_YELLOW, FONT_JEDI)
             position = text_surf.get_rect(center=(WIN_WIDTH / 2, WIN_HEIGHT / 2))
             self.window.blit(source=text_surf, dest=position)
 
