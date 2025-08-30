@@ -37,9 +37,9 @@ ENTITY_HEALTH = {
 ENTITY_DAMAGE = {
     'Player1': 1000,
     'Player2': 1000,
-    'sm_asteroid': 100,
-    'md_asteroid': 300,
-    'lg_asteroid': 800,
+    'sm_asteroid': 137,
+    'md_asteroid': 295,
+    'lg_asteroid': 748,
 }
 
 # Event
