@@ -3,9 +3,8 @@ import sys
 import pygame
 
 from code.Const import COLOR_TEXT_YELLOW, FONT_JEDI, WIN_WIDTH, WIN_HEIGHT
-from code.DBProxy import DBProxy
+from database.DBProxy import DBProxy
 from code.MenuScreen import MenuScreen
-from services.HighScoreService import HighScoreService
 
 
 class Score(MenuScreen):

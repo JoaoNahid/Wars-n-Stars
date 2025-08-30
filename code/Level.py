@@ -1,13 +1,12 @@
-import random
 import sys
 
 import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, WIN_WIDTH, EVENT_OBSTACLES, COLOR_TEXT_GREEN, \
+from code.Const import COLOR_TEXT_WHITE, WIN_HEIGHT, EVENT_PLANETS, EVENT_OBSTACLES, COLOR_TEXT_GREEN, \
     FONT_JEDI, COLOR_TEXT_GREENYELLOW, EVENT_HEAL
-from code.DBProxy import DBProxy
+from database.DBProxy import DBProxy
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
