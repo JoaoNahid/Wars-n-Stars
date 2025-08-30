@@ -4,9 +4,10 @@ from code.Entity import Entity
 
 
 class Cure(Entity):
-    def __init__(self, name, file_path, position, speed):
+    def __init__(self, name, file_path, position, speed, total_healing):
         super().__init__(name, file_path, position, speed)
-        self.health = 50
+        self.health = 100
+        self.total_healing = total_healing
         self.speed = speed
 
         self.death_sound = pygame.mixer.Sound("./assets/sounds/heal.wav")

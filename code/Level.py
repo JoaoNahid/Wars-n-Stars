@@ -49,7 +49,7 @@ class Level:
         pygame.time.set_timer(EVENT_OBSTACLES, 3800) # Background planets
 
         ## Obstacles
-        pygame.time.set_timer(EVENT_HEAL, 8500)
+        pygame.time.set_timer(EVENT_HEAL, 7500)
 
 
     def run(self):
@@ -106,7 +106,7 @@ class Level:
             i = 0
             for player in self.players.values():
                 i = i +1
-                self.level_text(16, f'HEALTH P{i}: {player.get_health()}', COLOR_TEXT_GREENYELLOW if i == 2 else COLOR_TEXT_GREEN, (10, pos_y_health))
+                self.level_text(16, f'HEALTH P{i}: {player.get_health():.0f}', COLOR_TEXT_GREENYELLOW if i == 2 else COLOR_TEXT_GREEN, (10, pos_y_health))
                 pos_y_health += 20
 
             self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 65))

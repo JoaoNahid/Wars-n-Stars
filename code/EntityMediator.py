@@ -18,9 +18,16 @@ class EntityMediator:
 
     @staticmethod
     def heal_player(player, cure):
-        player.health += cure.health
-        if player.health > ENTITY_HEALTH[player.name]:
-            player.reset_life()
+        percentage = cure.total_healing / 100
+        if cure.total_healing == 9:
+            player.health += ENTITY_HEALTH[player.name] * percentage
+            if player.health > ENTITY_HEALTH[player.name]:
+                player.health = ENTITY_HEALTH[player.name]
+        else:
+            new_cure = ENTITY_HEALTH[player.name] * percentage
+            if player.health < new_cure:
+                player.health = ENTITY_HEALTH[player.name] * percentage
+
         cure.health = 0
 
     @staticmethod

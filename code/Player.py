@@ -10,7 +10,7 @@ class Player(Entity):
     def __init__(self, name: str, file_path: str, position: tuple = (0,0), speed: int = 1, keyboard: int = 1):
         super().__init__(name, file_path, position, speed)
         self.keyboard = keyboard
-        self.health = ENTITY_HEALTH[self.name]
+        self.health: int = ENTITY_HEALTH[self.name]
         self.damage = ENTITY_DAMAGE[self.name]
         self.death_sound = pygame.mixer.Sound("./assets/sounds/explosion.wav")
         self.death_sound.set_volume(1)
@@ -37,7 +37,7 @@ class Player(Entity):
     def get_name(self):
         return Path(self.name).stem
 
-    def get_health(self):
+    def get_health(self) -> int:
         return self.health
 
     def reset_life(self):
