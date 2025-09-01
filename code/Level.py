@@ -109,9 +109,7 @@ class Level:
                 self.level_text(16, f'HEALTH P{i}: {player.get_health():.0f}', COLOR_TEXT_GREENYELLOW if i == 2 else COLOR_TEXT_GREEN, (10, pos_y_health))
                 pos_y_health += 20
 
-            self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 65))
-            self.level_text(14, f'md Entities: {len(self.md_entity_list)}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 45))
-            self.level_text(14, f'md Bg ent: {len(self.bg_entity_list)}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 25))
+            self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_TEXT_WHITE, (10, WIN_HEIGHT - 25))
             pygame.display.flip()
 
             # Collision
@@ -132,7 +130,7 @@ class Level:
                 EntityMediator.add_speed(entity_list=self.bg_entity_list)
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
-        text_font: Font = pygame.font.SysFont(name=FONT_JEDI, size=text_size)
+        text_font: Font = pygame.font.Font (name=FONT_JEDI, size=text_size)
         text_surf: Surface = text_font.render(text, True, text_color)
         text_rect: Rect = text_surf.get_rect(left=text_pos[0], top=text_pos[1])
         self.window.blit(source=text_surf, dest=text_rect)
