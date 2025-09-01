@@ -3,7 +3,7 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.Const import WIN_WIDTH, COLOR_TEXT_WHITE, FONT_JEDI, \
-    COLOR_TEXT_YELLOW, FONT_JEDI_BORDERED, FONT_JEDI_OUTLINE
+    COLOR_TEXT_YELLOW, FONT_JEDI_OUTLINE
 
 
 class Menu:
@@ -61,7 +61,7 @@ class Menu:
 
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple, font: str):
-        text_font: Font = pygame.font.SysFont(name=font, size=text_size)
+        text_font: Font = pygame.font.Font(font, text_size)
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)

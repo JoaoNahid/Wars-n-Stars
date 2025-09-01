@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 import pygame
-from pygame import Surface, Rect
+from pygame import Surface
 from pygame.font import Font
 
 
@@ -17,6 +17,6 @@ class MenuScreen(ABC):
         pass
 
     def mount_text(self, font_size: int, text: str, text_color: tuple, font_family: str):
-        font: Font = pygame.font.SysFont(name=font_family, size=font_size)
+        font: Font = pygame.font.Font(font_family, font_size)
         text_surf: Surface = font.render(text, True, text_color).convert_alpha()
         return text_surf

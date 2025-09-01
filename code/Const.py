@@ -11,9 +11,9 @@ COLOR_TEXT_GREEN = (50,205,50)
 COLOR_TEXT_GREENYELLOW = (173,255,47)
 
 # Fonts
-FONT_JEDI = 'Star Jedi'
-FONT_JEDI_BORDERED = 'StarJedi Special Edition'
-FONT_JEDI_OUTLINE = 'Star Jedi Hollow'
+FONT_JEDI = './assets/fonts/Starjedi.ttf'
+FONT_JEDI_BORDERED = './assets/fonts/Starjout.ttf'
+FONT_JEDI_OUTLINE = './assets/fonts/Starjhol.ttf'
 
 # Speed
 ENTITY_SPEED = {
